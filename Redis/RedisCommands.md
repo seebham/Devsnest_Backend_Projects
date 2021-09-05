@@ -85,3 +85,39 @@
     ```
     HEXISTS person name
     ```
+
+## PUB/SUB in Redis
+
+20. Subscribe to a channel
+
+    ```
+    SUBSCRIBE channelName
+    ```
+
+21. Publish a message to a channel
+
+    ```
+    PUBLISH channelName message
+    ```
+
+22. Subscribe to all the channels matching a specific pattern
+
+    ```
+    PSUBSCRIBE channelPattern (d*)
+    ```
+
+23. Unsubscribe a channel
+    ```
+    UNSUBSCRIBE channelName
+    ```
+24. Unsubscribe all the channels with matching a specific pattern
+    ```
+    PUNSUBSCRIBE channelPattern
+    ```
+
+## Redis Streams
+
+25. Create a Stream
+    ```
+    XADD mystream
+    ```
