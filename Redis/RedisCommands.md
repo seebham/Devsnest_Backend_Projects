@@ -1,4 +1,4 @@
-# Redis CLI Commands learnt in Day 1
+# Redis CLI Commands
 
 1. SET key value
    ```
