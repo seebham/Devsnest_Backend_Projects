@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/node": "^16.7.10"
+  },
+  "dependencies": {
+    "minimist": "^1.2.5"
+  }
+}
