@@ -5,7 +5,7 @@ I learnt NodeJS `fs` module and `minimist` library for writing this.
 
 ## Try this
 
-1. Visit <a href="https://github.com/seebham/Devsnest_Backend_Projects/tree/main/Day_05" target="_blank">CodeSandBox</a>
+1. Visit <a href="https://githubbox.com/seebham/Devsnest_Backend_Projects/tree/main/Day_05" target="_blank">CodeSandBox</a>
 2. Use the [Commands](#commands) in the console
 
 ## Commands
