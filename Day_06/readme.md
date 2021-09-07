@@ -3,7 +3,7 @@
 This NodeJS script is a for carrying out Create, Read, Update and Delete (CRUD) operation of File System. </br>
 I learnt NodeJS `fs` module and `minimist` library for writing this.
 </br></br>
-This uses `Synchronous` methods, for program with `Asynchronous` methods check <a href="https://github.com/seebham/Devsnest_Backend_Projects/tree/main/Day_06" target="_blank">Day 6</a> THA
+This uses `Asynchronous` methods, for program with `Synchronous` methods check <a href="https://github.com/seebham/Devsnest_Backend_Projects/tree/main/Day_05" target="_blank">Day 5</a> THA
 
 ## Try this
 
