@@ -1,0 +1,11 @@
+{
+  "name": "firstNodeServer",
+  "version": "1.0.0",
+  "description": "My first REST Server (Basic) for THA 7",
+  "main": "index.js",
+  "author": "Shubham Lingayat",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
