@@ -1,6 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 50px;
-  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 3vmin "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #111;
+  color: #eee;
+}
+h1,
+h4 {
+  color: #fff;
 }
 
 a {
