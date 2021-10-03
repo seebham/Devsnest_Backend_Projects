@@ -1,6 +1,6 @@
 const passport = require("passport");
-const User = require("../models/user"); // postgres model
-const bcrypt = require("bcrypt"); // for hashing
+const User = require("../models/user");
+const bcrypt = require("bcrypt");
 const { emailValidate } = require("./validation");
 var jwt = require("jsonwebtoken");
 

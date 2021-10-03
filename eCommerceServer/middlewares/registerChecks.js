@@ -1,33 +1,26 @@
-const { emailValidate, passwordValidate } = require("../utils/validation");
+const { emailValidate, passwordValidate } = require("../utils/emailValidate");
 
 /**
  *
- * @param {*} req
- * @param {*} res
+ * @param {request} req
+ * @param {res} res
  * @param {*} next
- * email validation
- * password validation
- * password confirmation
+ * @description
  */
-const registerInitialChecks = (req, res, next) => {
-  console.log(req.body);
+const registerInitialCheck = (req, res, next) => {
   const { email, password, confirmPassword } = req.body;
-  if (!emailValidate(email)) res.status(400).send({ error: "Invalid email" });
-  if (!passwordValidate(password))
-    res.status(400).send({ error: "Invalid password" });
-  if (password !== confirmPassword)
-    res.status(400).send({ error: "Passwords do not match" });
   if (
     typeof email === "string" &&
-    email.length > 0 &&
-    emailValidate(email) &&
     typeof password === "string" &&
-    password.length > 0 &&
-    passwordValidate(password) &&
-    password === confirmPassword
+    typeof confirmPassword === "string" &&
+    email.length > 0 &&
+    password.length > 8 &&
+    confirmPassword === password &&
+    emailValidate(email) &&
+    passwordValidate(password)
   ) {
     next();
-  } else res.status(401).send("Registration checks failed!");
+  } else res.status(401).send("Initial checks fail");
 };
 
-module.exports = registerInitialChecks;
+module.exports = registerInitialCheck;

@@ -1,6 +1,7 @@
-const User = require("../models/User");
+const User = require("../models/user");
 const { SECRET } = require("../config");
-const { Strategy: JwtStrategy, ExtractJwt, Strategy } = require("passport-jwt");
+
+const { Strategy, ExtractJwt } = require("passport-jwt");
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -10,12 +11,16 @@ const opts = {
 module.exports = (passport) => {
   passport.use(
     new Strategy(opts, async (payload, done) => {
-      await User.findById(payload.user_id)
+      await User.findByPk(payload.user_id)
         .then((user) => {
-          if (user) return done(null, user);
+          if (user) {
+            return done(null, user);
+          }
           return done(null, false);
         })
-        .catch((err) => done(null, false));
+        .catch((err) => {
+          return done(null, false);
+        });
     })
   );
 };
