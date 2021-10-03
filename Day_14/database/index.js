@@ -1,18 +1,30 @@
 const { Sequelize } = require("sequelize");
+const {
+  sequelize_database,
+  sequelize_username,
+  sequelize_host,
+  sequelize_dialect,
+  sequelize_password,
+} = require("../config");
 
-const sequelize = new Sequelize("postgres", "postgres", "lol", {
-  host: "localhost",
-  dialect: "postgres",
-});
+const sequelize = new Sequelize(
+  sequelize_database,
+  sequelize_username,
+  sequelize_password,
+  {
+    host: sequelize_host,
+    dialect: sequelize_dialect,
+  }
+);
 
-sequelize.sync();
+sequelize.sync({ alter: true });
 
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.log("Connection established");
+  } catch (err) {
+    console.log("Unable to connect db");
   }
 })();
 

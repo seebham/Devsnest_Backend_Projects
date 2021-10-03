@@ -1,41 +1,56 @@
-const User = require("../models/mongo");
+const User = require("../models/user");
 const bcrypt = require("bcrypt");
+// const User = require("../models/mongo");
+
 const saltRounds = 10;
-/**
- *
- * @param {*} req
- * @param {*} res
- *
- * @description
- *  Check if the email is already registered.
- *  If not, create a new user.
- *  If yes, return an error.
- *
- */
-
 const register = async (req, res) => {
-  const { email, password } = req.body;
-
+  const { email, password, fullName } = req.body;
   try {
-    const alreadyExists = await User.findOne({ where: { email } }).exec();
-    if (alreadyExists)
-      res.status(401).json({ error: "Email already registered" });
-    else {
-      const salt = bcrypt.genSaltSync(saltRounds);
-      const hash = bcrypt.hashSync(password, salt);
+    const alreadyExists = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (alreadyExists) res.status(401).send("Email already exists");
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(password, salt);
+    const newUser = new User({
+      email: email.toLowerCase(),
+      fullName,
+      password: hash,
+    });
 
-      const newUser = new User({
-        email: email.toLowerCase(),
-        password: hash,
-        fullName: "Dummy",
-      });
-      const savedUser = await newUser.save();
-      res.status(201).json(savedUser);
-    }
+    const savedUser = await newUser.save();
+    res.status(201).send(savedUser);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(500).send("Something unexpected occurred");
   }
 };
+const registerSuperAdmin = async (req, res) => {
+  const { email, password, fullName } = req.body;
+  try {
+    const alreadyExists = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (alreadyExists) res.status(401).send("Email already exists");
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(password, salt);
+    const newUser = new User({
+      email: email.toLowerCase(),
+      fullName,
+      password: hash,
+      role: "superAdmin",
+    });
 
-module.exports = register;
+    const savedUser = await newUser.save();
+    req.session.User = savedUser;
+    res.status(201).send(savedUser);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Something unexpected occurred");
+  }
+};
+module.exports = { register, registerSuperAdmin };

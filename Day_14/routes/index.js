@@ -2,7 +2,8 @@ var express = require("express");
 var registerInitialChecks = require("../middlewares/registerChecks");
 
 var router = express.Router();
-var register = require("../controllers/register");
+var { register, registerSuperAdmin } = require("../controllers/register");
+var check = require("../middlewares/checkSuperAdmin");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -18,5 +19,7 @@ router.get("/testRedis", (req, res) => {
 });
 
 router.post("/register", registerInitialChecks, register);
+router.post("/register-super-admin", registerInitialChecks, registerSuperAdmin);
+router.get("/super", check);
 
 module.exports = router;
