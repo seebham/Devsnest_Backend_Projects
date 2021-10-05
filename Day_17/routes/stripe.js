@@ -1,22 +1,21 @@
 var router = require("express").Router();
 var path = require("path");
-var fs = require("fs");
-var { STRIPE_KEY } = require("../config");
+const { STRIPE_KEY } = require("../config");
 const stripe = require("stripe")(STRIPE_KEY);
 
-router.get("/", function (req, res) {
+router.get("/payment", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/html/payment.html"));
 });
 
-router.post("/payment", async function (req, res) {
+router.post("/payment", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      lines_items: [
+      line_items: [
         {
           amount: req.body.price * 100,
-          name: "Shopping",
-          quantity: 1,
+          name: "Shoppping",
           currency: "usd",
+          quantity: 1,
         },
       ],
       payment_method_types: ["card"],
@@ -25,7 +24,8 @@ router.post("/payment", async function (req, res) {
     });
     res.redirect(303, session.url);
   } catch (err) {
-    res.status(500).send({ err });
+    console.log(err);
+    res.status(500).send();
   }
 });
 
