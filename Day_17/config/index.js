@@ -9,4 +9,5 @@ module.exports = {
   sequelize_dialect: process.env.SEQUELIZE_DIALECT,
   app_port: process.env.PORT,
   SECRET: process.env.SECRET,
+  STRIPE_KEY: process.env.STRIPE_KEY,
 };
