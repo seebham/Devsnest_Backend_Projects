@@ -46,6 +46,7 @@ app.use("/users", usersRouter);
 app.use("/passport", passportRouter);
 app.use("/products", require("./routes/products"));
 app.use("/stripe", require("./routes/stripe"));
+app.use("/search", require("./routes/search"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
